@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'models/food_item.dart';
-import 'pages/account_page.dart';
-import 'pages/cart_page.dart';
-import 'pages/menu_page.dart';
-import 'provider/cart_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'provider/cart_provider.dart';
-import 'pages/menu_page.dart';
-import 'pages/login_page.dart';
-import 'pages/order_history_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'view_model/cart_provider.dart';
+import 'view_model/order_provider.dart';
+
+import 'view/menu_page.dart';
+import 'view/cart_page.dart';
+import 'view/account_page.dart';
+import 'view/order_history_page.dart';
+import 'view/login_page.dart';
+import 'models/food_item.dart';
 import 'models/order_model.dart';
-import'provider/order_provider.dart';
 
 void main() {
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => CartProvider()),
+        ChangeNotifierProvider(create: (_) => OrderProvider()),
       ],
       child: const MyApp(),
     ),
@@ -33,10 +33,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Food Ordering App',
-      theme: ThemeData.dark(),
-      home: const SplashScreen(), // 🔥 mulai dari SplashScreen
-
-      // 🧭 Tambahkan route di bawah ini
+      theme: ThemeData(primarySwatch: Colors.orange),
+      home: const SplashScreen(),
       routes: {
         '/menu': (context) => const MenuPage(),
         '/cart': (context) => const CartPage(),
